@@ -14,20 +14,20 @@ def urlify(text: list[str]) -> int:
     new_size = original_size - 1 + (2 * spacebars_found)
     text += [''] * (2 * spacebars_found)
 
-    orig_len_index = original_size - 1
-    new_len_index = new_size
+    fast_index = original_size - 1
+    slow_index = new_size
 
-    while orig_len_index >= 0:
-        if text[orig_len_index] == ' ':
-            text[new_len_index] = '0'
-            text[new_len_index-1] = '2'
-            text[new_len_index-2] = '%'
-            new_len_index -= 3
+    while fast_index >= 0:
+        if text[fast_index] == ' ':
+            text[slow_index] = '0'
+            text[slow_index-1] = '2'
+            text[slow_index-2] = '%'
+            slow_index -= 3
         else:
-            text[new_len_index] = text[orig_len_index]
-            new_len_index -= 1
+            text[slow_index] = text[fast_index]
+            slow_index -= 1
 
-        orig_len_index -= 1
+        fast_index -= 1
     return new_size + 1
 
 
@@ -78,5 +78,4 @@ new_len = urlify(text)
 
 assert new_len == 6
 assert text[:new_len] == list('%20%20')
-
 
