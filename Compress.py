@@ -14,18 +14,20 @@ def compress (text: list[str]) -> int:
         else:
             text[write_index] = text[x-1]
             write_index += 1
-            #Пишем после буквы количество повторений этой буквы и увеличиваем индекс записи. После чего обнуляем счетчик повторяющихся символов
+            #Пишем после буквы количество повторений этой буквы и увеличиваем индекс записи.
+            #После чего обнуляем счетчик повторяющихся символов.
+            #Цикл нужен для записи счетчиков которые >9 (больше чем однозначные)
             if char_counter > 1:
-                digit = str(char_counter)
-                text[write_index] = digit
-                write_index += 1
+                for digit in str(char_counter):
+                    text[write_index] = digit
+                    write_index += 1
             char_counter = 1
 
     #Выйдя из цикла, записываем последний считаемый символ, делаем последнюю проверку для повторяющихся символов
     text[write_index] = text[len(text)-1]
     write_index += 1
     if char_counter > 1:
-        #Изначально у меня было 2 таких цикла, и тот что выше. Потом я подумал, что они не нужны и убрал их, но без этого цикла код не работает, времени разбираться нету
+        #Такой же цикл, как и выше
         for digit in str(char_counter):
             text[write_index] = digit
             write_index += 1
