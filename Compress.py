@@ -74,3 +74,10 @@ new_len = compress(text)
 
 assert new_len == 3
 assert text[:new_len] == list('AB4')
+
+text = list('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB')
+new_len = compress(text)
+
+assert new_len == 5
+assert text[:new_len] == list('A33B4')
+
